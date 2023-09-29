@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<bean class="org.springframework.jdbc.core.JdbcTemplate" name="JdbcTemplate">
+  <property name="dataSource" >
+  <ref bean="ds"></ref>
+  </property>
+</bean>
+
+
+
+<!-- the DataSource (parameterized for configuration via a PropertyPlaceHolderConfigurer) -->
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="ds">
+<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+<property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=SpringJDBC;integratedSecurity=true;encrypt=true;trustServerCertificate=true;"/>
+</bean>
+<bean class="com.spring.dao.MyClassDoaImpl" name="MyClass">
+  <property name="jdbcTemplate" >
+  <ref bean="JdbcTemplate"></ref>
+  </property>
+</bean>
+</beans>
+
